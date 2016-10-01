@@ -32,4 +32,15 @@ html.no-js(lang='en')
             .cd-timeline-block(style='text-align: center')
                 .cd-timeline-content(style='float: none; margin: 0 auto') This user doesn't have any posts yet!
         script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+        script(src='https://cdn.socket.io/socket.io-1.4.5.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js')
         script(src='/js/main.js')
+        script.
+            var socket = io('/#{username}');
+            socket.on('new_post', function (post) {
+                var postMarkup = "<div class='cd-timeline-block'><div class='cd-timeline-img cd-picture'>";
+                postMarkup += "<img src='img/cd-icon-" + post.Type + ".svg'/></div><div class='cd-timeline-content'>";
+                postMarkup += "<h2>" + moment(post.Timestamp).utcOffset(10).format("h:mm A") + "</h2>";
+                postMarkup += "<p>" + post.Content + "</p><span class='cd-date'>" + moment(post.Timestamp).utcOffset(10).format("MMM D") + "</span></div></div>";
+                $('#cd-timeline').prepend(postMarkup);
+            });
