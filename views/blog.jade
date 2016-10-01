@@ -1,0 +1,31 @@
+doctype html
+html.no-js(lang='en')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(href='http://fonts.googleapis.com/css?family=Droid+Serif|Open+Sans:400,700', rel='stylesheet', type='text/css')
+        link(rel='stylesheet', href='/css/reset.css')
+        // CSS reset
+        link(rel='stylesheet', href='/css/style.css')
+        // Resource style
+        script(src='/js/modernizr.js')
+        // Modernizr
+        title= title
+    body
+        header
+            h1= username
+        section#cd-timeline.cd-container
+            each post in posts
+                .cd-timeline-block
+                    .cd-timeline-img.cd-picture
+                        img(src='img/cd-icon-' + post.Type + '.svg')
+                    // cd-timeline-img
+                    .cd-timeline-content
+                        h2= moment(post.Timestamp).utcOffset(10).format("hh:mm A")
+                        p= post.Content
+                        span.cd-date= moment(post.Timestamp).utcOffset(10).format("MMM D")
+                    // cd-timeline-content
+                // cd-timeline-block
+        // cd-timeline
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+        script(src='/js/main.js')
