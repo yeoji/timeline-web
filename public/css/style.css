@@ -154,11 +154,17 @@ header h1 {
   margin-left: -12px;
   margin-top: -12px;
 }
-.cd-timeline-img.cd-picture {
+.cd-timeline-img.cd-text {
+  background: #303e49;
+}
+.cd-timeline-img.cd-image {
   background: #75ce66;
 }
-.cd-timeline-img.cd-movie {
+.cd-timeline-img.cd-video {
   background: #c03b44;
+}
+.cd-timeline-img.cd-audio {
+  background: #58A4B0;
 }
 .cd-timeline-img.cd-location {
   background: #f0ca45;

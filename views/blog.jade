@@ -7,6 +7,7 @@ html.no-js(lang='en')
         link(rel='stylesheet', href='/css/reset.css')
         // CSS reset
         link(rel='stylesheet', href='/css/style.css')
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css')
         // Resource style
         script(src='/js/modernizr.js')
         // Modernizr
@@ -18,7 +19,7 @@ html.no-js(lang='en')
             section#cd-timeline.cd-container
                 each post in posts
                     .cd-timeline-block
-                        .cd-timeline-img.cd-picture
+                        .cd-timeline-img(class='cd-' + post.Type)
                             img(src='img/cd-icon-' + post.Type + '.svg')
                         // cd-timeline-img
                         .cd-timeline-content
@@ -34,13 +35,19 @@ html.no-js(lang='en')
         script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
         script(src='https://cdn.socket.io/socket.io-1.4.5.js')
         script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js')
+        script(src="//cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/js/emojify.min.js")
         script(src='/js/main.js')
         script.
             var socket = io('/#{username}');
             socket.on('new_post', function (post) {
-                var postMarkup = "<div class='cd-timeline-block'><div class='cd-timeline-img cd-picture'>";
+                var postMarkup = "<div class='cd-timeline-block'><div class='cd-timeline-img cd-"+ post.Type +"'>";
                 postMarkup += "<img src='img/cd-icon-" + post.Type + ".svg'/></div><div class='cd-timeline-content'>";
                 postMarkup += "<h2>" + moment(post.Timestamp).utcOffset(10).format("h:mm A") + "</h2>";
                 postMarkup += "<p>" + post.Content + "</p><span class='cd-date'>" + moment(post.Timestamp).utcOffset(10).format("MMM D") + "</span></div></div>";
                 $('#cd-timeline').prepend(postMarkup);
             });
+        script.
+            emojify.setConfig({
+               img_dir: 'https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/images/basic'
+            });
+            emojify.run();
