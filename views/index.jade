@@ -1,5 +1,19 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype html
+html.no-js(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(href='http://fonts.googleapis.com/css?family=Droid+Serif|Open+Sans:400,700', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', href='/css/reset.css')
+    // CSS reset
+    link(rel='stylesheet', href='/css/style.css')
+    // Resource style
+    script(src='/js/modernizr.js')
+    // Modernizr
+    title= "TimeJar | Welcome to TimeJar!"
+  body(style='background-color: #303e49')
+    header
+      h1 Welcome to TimeJar!
+      img(src='/img/icon-quotes.svg', width='15%')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+    script(src='/js/main.js')

@@ -5,18 +5,28 @@ var timelineApi = require('../services/TimelineAPIService.js');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    timelineApi.getUserPosts("test")
-        .then(function(posts) {
-            res.render('blog', {
-                title: 'Test Blog',
-                username: 'TEST',
-                posts: posts
+    // Get the username from the request
+    var username = req.subdomains.reverse().join('.');
+    if(username != "" && username != "www") {
+        timelineApi.getUserPosts(username)
+            .then(function (posts) {
+                res.render('blog', {
+                    title: username,
+                    username: username.toUpperCase(),
+                    posts: posts
+                });
+            })
+            .catch(function(err) {
+                res.render('blog_404', {
+                    username: username
+                });
             });
+    } else {
+        res.render('index', {
+            title: 'Timejar',
+            content: 'Welcome to Timejar'
         });
-});
-
-router.get('/:username', function (req, res, next) {
-
+    }
 });
 
 module.exports = router;
