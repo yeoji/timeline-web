@@ -1,2 +1,2 @@
 #Timeline Web Interface
-An SMS-enabld blogging platform
+An SMS-enabled blogging platform
