@@ -24,7 +24,11 @@ html.no-js(lang='en')
                         // cd-timeline-img
                         .cd-timeline-content
                             h2= moment(post.Timestamp).utcOffset(10).format("h:mm A")
-                            p= post.Content
+                            if post.Type == 'image'
+                                br
+                                img(src=post.Content)
+                            else
+                                p= post.Content
                             span.cd-date= moment(post.Timestamp).utcOffset(10).format("MMM D")
                         // cd-timeline-content
                     // cd-timeline-block
@@ -43,7 +47,12 @@ html.no-js(lang='en')
                 var postMarkup = "<div class='cd-timeline-block'><div class='cd-timeline-img cd-"+ post.Type +"'>";
                 postMarkup += "<img src='img/cd-icon-" + post.Type + ".svg'/></div><div class='cd-timeline-content'>";
                 postMarkup += "<h2>" + moment(post.Timestamp).utcOffset(10).format("h:mm A") + "</h2>";
-                postMarkup += "<p>" + post.Content + "</p><span class='cd-date'>" + moment(post.Timestamp).utcOffset(10).format("MMM D") + "</span></div></div>";
+                if(post.Type == 'image') {
+                    postMarkup += "<br/><img src='"+ post.Content +"' />";
+                } else {
+                    postMarkup += "<p>" + post.Content + "</p>";
+                }
+                postMarkup += "<span class='cd-date'>" + moment(post.Timestamp).utcOffset(10).format("MMM D") + "</span></div></div>";
                 $('#cd-timeline').prepend(postMarkup);
             });
         script.
