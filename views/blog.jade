@@ -27,6 +27,10 @@ html.no-js(lang='en')
                             if post.Type == 'image'
                                 br
                                 img(src=post.Content)
+                            else if post.Type == 'audio'
+                                br
+                                audio(controls, style="width: 100%")
+                                    source(src=post.Content, type='audio/aac')
                             else
                                 p= post.Content
                             span.cd-date= moment(post.Timestamp).utcOffset(10).format("MMM D")
@@ -49,6 +53,8 @@ html.no-js(lang='en')
                 postMarkup += "<h2>" + moment(post.Timestamp).utcOffset(10).format("h:mm A") + "</h2>";
                 if(post.Type == 'image') {
                     postMarkup += "<br/><img src='"+ post.Content +"' />";
+                } else if(post.Type == 'audio') {
+                    postMarkup += "<br/><audio controls style='width: 100%'><source src='" + post.Content + "' type='audio/aac'/></audio>";
                 } else {
                     postMarkup += "<p>" + post.Content + "</p>";
                 }
